@@ -10,7 +10,7 @@ class PersonTest {
     @Test
     void groupedAssertions () {
         // given
-        Person person = new Person( 1l, "Joe", "Buck" );
+        Person person = new Person( 1L, "Joe", "Buck" );
         //then
         assertAll(
                 "Test Properties Set",
@@ -22,7 +22,7 @@ class PersonTest {
     @Test
     void groupedAssertionsWithMessages () {
         // given
-        Person person = new Person( 1l, "Joe", "Buck" );
+        Person person = new Person( 1L, "Joe", "Buck" );
         //then
         assertAll(
                 "Test Properties Set With Messages",
