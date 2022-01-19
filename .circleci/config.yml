@@ -38,11 +38,7 @@ jobs:
           command: mvn -B -DskipTests clean package
       # Then run your tests!
       - run:
-          name: Unit Test
-          command: mvn test
-
-      - run:
-          name: Integration Test
+          name: Unit & Integration Test
           command: mvn integration-test
 
 # Invoke jobs via workflows
