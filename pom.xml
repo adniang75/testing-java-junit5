@@ -41,6 +41,7 @@
         <java.version>11</java.version>
         <junit-platform.version>5.8.2</junit-platform.version>
         <project.encoding>UTF-8</project.encoding>
+        <maven.surefire.version>3.0.0-M5</maven.surefire.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
@@ -82,7 +83,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
+                <version>${maven.surefire.version}</version>
                 <configuration>
                     <argLine>
                         --illegal-access=permit
@@ -92,7 +93,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.0</version>
+                <version>2.22.2</version>
                 <configuration>
                     <argLine>
                         --illegal-access=permit
