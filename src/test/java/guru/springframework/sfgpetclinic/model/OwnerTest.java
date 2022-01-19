@@ -6,10 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
+
+import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -78,6 +77,20 @@ class OwnerTest implements ModelTests {
         System.out.println( "\t\tState: " + stateName + " Value1: " + value1 + " Value2: " + value2 );
     }
 
+    @DisplayName( "Method Provider Test" )
+    @ParameterizedTest( name = "{displayName} - [{index}] {arguments}" )
+    @MethodSource( "getArgs" )
+    void fromMethodTest ( String stateName, int value1, int value2 ) {
+        System.out.println( "\t\tState: " + stateName + " Value1: " + value1 + " Value2: " + value2 );
+    }
+
+    static Stream<Arguments> getArgs () {
+        return Stream.of(
+                Arguments.of( "FL", 1, 1 ),
+                Arguments.of( "NY", 2, 2 ),
+                Arguments.of( "NJ", 3, 3 ) );
+    }
+
     @Nested
     class UsingHamcrestWithJUnit5Test {
         @Test
@@ -85,4 +98,7 @@ class OwnerTest implements ModelTests {
             assertThat( owner.getCity(), is( equalTo( "Key West" ) ) );
         }
     }
+
+
+
 }
