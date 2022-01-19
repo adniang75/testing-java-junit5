@@ -2,6 +2,7 @@ package guru.springframework.sfgpetclinic.model;
 
 import guru.springframework.sfgpetclinic.interfaces.ModelTests;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,7 +28,6 @@ class OwnerTest implements ModelTests {
 
     @Test
     void dependentAssertions () {
-
         assertAll(
                 "Properties Test",
                 () -> assertAll(
@@ -41,10 +41,10 @@ class OwnerTest implements ModelTests {
                         () -> assertEquals( "1231231234", owner.getTelephone(), "Telephone not set properly" )
                 )
         );
-
     }
 
-    @ParameterizedTest
+    @ParameterizedTest( name = "{displayName} - [{index}] {arguments}" )
+    @DisplayName( "Value Source Test" )
     @ValueSource( strings = { "Spring", "Framework", "Guru" } )
     void testValueSource ( String value ) {
         System.out.println( "\t\tValue: " + value );
@@ -52,12 +52,9 @@ class OwnerTest implements ModelTests {
 
     @Nested
     class UsingHamcrestWithJUnit5Test {
-
         @Test
         void index () {
-
             assertThat( owner.getCity(), is( equalTo( "Key West" ) ) );
-
         }
     }
 }
