@@ -4,6 +4,8 @@ import guru.springframework.sfgpetclinic.interfaces.ModelTests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -42,6 +44,12 @@ class OwnerTest implements ModelTests {
 
     }
 
+    @ParameterizedTest
+    @ValueSource( strings = { "Spring", "Framework", "Guru" } )
+    void testValueSource ( String value ) {
+        System.out.println( "\t\tValue: " + value );
+    }
+
     @Nested
     class UsingHamcrestWithJUnit5Test {
 
@@ -52,5 +60,4 @@ class OwnerTest implements ModelTests {
 
         }
     }
-
 }
