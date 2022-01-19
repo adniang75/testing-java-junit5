@@ -1,14 +1,18 @@
 package guru.springframework.sfgpetclinic.controllers;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import java.time.Duration;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.condition.JRE.JAVA_11;
+import static org.junit.jupiter.api.condition.JRE.JAVA_8;
 
 class IndexControllerTest {
 
@@ -84,4 +88,57 @@ class IndexControllerTest {
     void testAssumptionTrueHome () {
         assumeTrue( "/Users/alassaneniang".equalsIgnoreCase( System.getenv( "HOME" ) ) );
     }
+
+    @Nested
+    class ConditionalTests {
+
+        @EnabledOnOs( OS.MAC )
+        @Test
+        void testOnMacOS () {
+
+        }
+
+        @EnabledOnOs( OS.WINDOWS )
+        @Test
+        void testOnWindows () {
+
+        }
+
+        @EnabledOnJre( JAVA_8 )
+        @Test
+        void testOnJava8 () {
+
+        }
+
+        @EnabledOnJre( JAVA_11 )
+        @Test
+        void testOnJava11 () {
+
+        }
+
+        @EnabledIfEnvironmentVariable( named = "USER", matches = "alassaneniang" )
+        @Test
+        void testIfUserIsMe () {
+
+        }
+
+        @EnabledIfEnvironmentVariable( named = "USER", matches = "jt" )
+        @Test
+        void testIfUserIsJT () {
+
+        }
+    }
+
+    @Nested
+    class UsingAssertJWithJUnit5Test {
+
+        @Test
+        void index () {
+            assertThat( controller.index() )
+                    .withFailMessage( () -> "Wrong view returned from controller.index()" )
+                    .isEqualTo( "index" );
+        }
+    }
+
+
 }
