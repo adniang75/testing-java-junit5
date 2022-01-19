@@ -1,5 +1,6 @@
 package guru.springframework.sfgpetclinic.model;
 
+import guru.springframework.sfgpetclinic.dataprovider.CustomArgsProvider;
 import guru.springframework.sfgpetclinic.interfaces.ModelTests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,6 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class OwnerTest implements ModelTests {
 
     Owner owner;
+
+    static Stream<Arguments> getArgs () {
+        return Stream.of(
+                Arguments.of( "FL", 1, 1 ),
+                Arguments.of( "NY", 2, 2 ),
+                Arguments.of( "NJ", 3, 3 ) );
+    }
 
     @BeforeEach
     void setUp () {
@@ -84,11 +92,11 @@ class OwnerTest implements ModelTests {
         System.out.println( "\t\tState: " + stateName + " Value1: " + value1 + " Value2: " + value2 );
     }
 
-    static Stream<Arguments> getArgs () {
-        return Stream.of(
-                Arguments.of( "FL", 1, 1 ),
-                Arguments.of( "NY", 2, 2 ),
-                Arguments.of( "NJ", 3, 3 ) );
+    @DisplayName( "Custom Provider Test" )
+    @ParameterizedTest( name = "{displayName} - [{index}] {arguments}" )
+    @ArgumentsSource( CustomArgsProvider.class )
+    void fromCustomProviderTest ( String stateName, int value1, int value2 ) {
+        System.out.println( "\t\tState: " + stateName + " Value1: " + value1 + " Value2: " + value2 );
     }
 
     @Nested
@@ -98,7 +106,5 @@ class OwnerTest implements ModelTests {
             assertThat( owner.getCity(), is( equalTo( "Key West" ) ) );
         }
     }
-
-
 
 }
