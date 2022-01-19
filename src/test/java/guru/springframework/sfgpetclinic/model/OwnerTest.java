@@ -1,18 +1,28 @@
 package guru.springframework.sfgpetclinic.model;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OwnerTest {
 
-    @Test
-    void dependentAssertions () {
+    Owner owner;
 
-        Owner owner = new Owner( 1L, "Joe", "Buck" );
+    @BeforeEach
+    void setUp () {
+        owner = new Owner( 1L, "Joe", "Buck" );
         owner.setCity( "Key West" );
         owner.setTelephone( "1231231234" );
+    }
+
+    @Test
+    void dependentAssertions () {
 
         assertAll(
                 "Properties Test",
@@ -29,4 +39,16 @@ class OwnerTest {
         );
 
     }
+
+    @Nested
+    class UsingHamcrestWithJUnit5Test {
+
+        @Test
+        void index () {
+
+            assertThat( owner.getCity(), is( equalTo( "Key West" ) ) );
+
+        }
+    }
+
 }
