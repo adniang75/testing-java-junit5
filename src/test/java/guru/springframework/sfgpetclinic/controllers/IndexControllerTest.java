@@ -4,8 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class IndexControllerTest {
 
@@ -29,13 +28,23 @@ class IndexControllerTest {
     }
 
     @Test
-    @DisplayName( "Test exception" )
+    @DisplayName( "Test exception handler" )
     void oupsHandler () {
         assertTrue(
                 "notimplemented".equals( controller.oupsHandler() ),
                 () -> "This is some expensive "
                         + "Message to build "
                         + "for my test"
+        );
+    }
+
+
+    @Test
+    @DisplayName( "Test Thrown Exception" )
+    void oopsException () {
+        assertThrows(
+                ValueNotFoundException.class,
+                () -> controller.oopsException()
         );
     }
 }
