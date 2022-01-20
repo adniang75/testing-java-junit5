@@ -1,4 +1,4 @@
-package guru.springframework;
+package guru.springframework.mockito;
 
 import org.junit.jupiter.api.Test;
 
