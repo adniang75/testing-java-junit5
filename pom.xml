@@ -49,6 +49,8 @@
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
         <sonar.organization>adniang75</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <!-- JaCoCo Properties -->
+        <jacoco.version>0.8.7</jacoco.version>
     </properties>
 
     <dependencies>
@@ -122,6 +124,7 @@
                     <argLine>
                         --illegal-access=permit
                     </argLine>
+                    <argLine>${argLine} -Xms256m -Xmx1048m</argLine>
                     <!-- Uncomment the following line to run tests by tags => model & controller -->
                     <!--<groups>model | controller</groups>-->
                 </configuration>
@@ -134,6 +137,7 @@
                     <argLine>
                         --illegal-access=permit
                     </argLine>
+                    <argLine>${argLine} -Xms256m -Xmx1048m</argLine>
                 </configuration>
                 <executions>
                     <execution>
@@ -154,36 +158,52 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
+                        <id>default-prepare-agent</id>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-check</id>
+                        <id>default-check</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
                         <configuration>
                             <rules>
-                                <rule>
+                                <rule implementation="org.jacoco.maven.RuleConfiguration">
+                                    <element>BUNDLE</element>
                                     <limits>
-                                        <limit>
-                                            <minimum>0.3</minimum>
+                                        <limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>INSTRUCTION</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.0</minimum>
+                                        </limit>
+                                        <limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.0</minimum>
+                                        </limit>
+                                        <limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>CLASS</counter>
+                                            <value>MISSEDCOUNT</value>
+                                            <maximum>1000</maximum>
                                         </limit>
                                     </limits>
                                 </rule>
                             </rules>
                         </configuration>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
