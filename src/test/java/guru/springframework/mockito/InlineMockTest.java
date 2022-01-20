@@ -12,6 +12,6 @@ class InlineMockTest {
     @Test
     void testInlineMock () {
         Map mapMock = mock( Map.class );
-        assertThat( mapMock.size() ).isEqualTo( 0 );
+        assertThat( mapMock.size() ).isZero();
     }
 }

@@ -125,8 +125,6 @@
                         --illegal-access=permit
                     </argLine>
                     <argLine>${argLine} -Xms256m -Xmx1048m</argLine>
-                    <!-- Uncomment the following line to run tests by tags => model & controller -->
-                    <!--<groups>model | controller</groups>-->
                 </configuration>
             </plugin>
             <plugin>

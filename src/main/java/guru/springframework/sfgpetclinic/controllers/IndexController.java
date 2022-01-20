@@ -2,13 +2,15 @@ package guru.springframework.sfgpetclinic.controllers;
 
 public class IndexController {
 
-    public String index () {
+    private static final String INDEX = "index";
+    private static final String NOT_IMPLEMENTED = "notimplemented";
 
-        return "index";
+    public String index () {
+        return INDEX;
     }
 
     public String oupsHandler () {
-        return "notimplemented";
+        return NOT_IMPLEMENTED;
     }
 
     public String oopsException () {

@@ -13,36 +13,38 @@ import java.util.Map;
 
 public class VisitController {
 
+    private static final String VIEW_CREATE_OR_UPDATE_VISIT_FORM = "pets/createOrUpdateVisitForm";
+
     private final VisitService visitService;
     private final PetService petService;
 
-    public VisitController(VisitService visitService, PetService petService) {
+    public VisitController ( VisitService visitService, PetService petService ) {
         this.visitService = visitService;
         this.petService = petService;
     }
 
-    public void setAllowedFields(WebDataBinder dataBinder) {
-        dataBinder.setDisallowedFields("id");
+    public void setAllowedFields ( WebDataBinder dataBinder ) {
+        dataBinder.setDisallowedFields( "id" );
     }
 
-    public Visit loadPetWithVisit(Long petId, Map<String, Object> model) {
-        Pet pet = petService.findById(petId);
-        model.put("pet", pet);
+    public Visit loadPetWithVisit ( Long petId, Map<String, Object> model ) {
+        Pet pet = petService.findById( petId );
+        model.put( "pet", pet );
         Visit visit = new Visit();
-        pet.getVisits().add(visit);
-        visit.setPet(pet);
+        pet.getVisits().add( visit );
+        visit.setPet( pet );
         return visit;
     }
 
-    public String initNewVisitForm(Long petId, Map<String, Object> model) {
-        return "pets/createOrUpdateVisitForm";
+    public String initNewVisitForm ( Long petId, Map<String, Object> model ) {
+        return VIEW_CREATE_OR_UPDATE_VISIT_FORM;
     }
 
-    public String processNewVisitForm(@Valid Visit visit, BindingResult result) {
-        if (result.hasErrors()) {
-            return "pets/createOrUpdateVisitForm";
+    public String processNewVisitForm ( @Valid Visit visit, BindingResult result ) {
+        if ( result.hasErrors() ) {
+            return VIEW_CREATE_OR_UPDATE_VISIT_FORM;
         } else {
-            visitService.save(visit);
+            visitService.save( visit );
 
             return "redirect:/owners/{ownerId}";
         }
