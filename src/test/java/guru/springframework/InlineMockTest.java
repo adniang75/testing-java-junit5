@@ -7,11 +7,11 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class InlineMockTest {
+class InlineMockTest {
 
     @Test
     void testInlineMock () {
         Map mapMock = mock( Map.class );
-        assertThat( mapMock.size() ).isZero();
+        assertThat( mapMock.size() ).isEqualTo( 0 );
     }
 }
