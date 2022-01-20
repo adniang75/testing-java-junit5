@@ -107,6 +107,7 @@
                     <argLine>
                         --illegal-access=permit
                     </argLine>
+                    <!-- Uncomment the following line to run tests by tags => model & controller -->
                     <!--<groups>model | controller</groups>-->
                 </configuration>
             </plugin>
@@ -142,6 +143,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.1.2</version>
             </plugin>
         </plugins>
     </reporting>
