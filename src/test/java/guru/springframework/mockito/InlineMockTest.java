@@ -10,9 +10,9 @@ import static org.mockito.Mockito.mock;
 class InlineMockTest {
 
     @Test
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings( { "unchecked", "rawtypes" } )
     void testInlineMock () {
-        Map<String, Object> mapMock = mock( Map.class );
-        assertThat( mapMock ).isEmpty();
+        Map mapMock = mock( Map.class );
+        assertThat( mapMock ).isNotNull();
     }
 }

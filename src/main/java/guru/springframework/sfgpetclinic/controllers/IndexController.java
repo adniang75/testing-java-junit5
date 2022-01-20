@@ -3,7 +3,7 @@ package guru.springframework.sfgpetclinic.controllers;
 public class IndexController {
 
     private static final String INDEX = "index";
-    private static final String NOT_IMPLEMENTED = "notimplemented";
+    private static final String NOT_IMPLEMENTED = "notImplemented";
 
     public String index () {
         return INDEX;
