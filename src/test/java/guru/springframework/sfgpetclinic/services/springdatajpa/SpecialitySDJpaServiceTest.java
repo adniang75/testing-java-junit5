@@ -26,19 +26,11 @@ class SpecialitySDJpaServiceTest {
 
     @Test
     void testDeleteByObject () {
+        // given
         Speciality speciality = new Speciality();
+        // when
         service.delete( speciality );
-        verify( specialtyRepository ).delete( any( Speciality.class ) );
-    }
-
-    @Test
-    void findByIdTest () {
-        Speciality speciality = new Speciality();
-        when( specialtyRepository.findById( anyLong() ) )
-                .thenReturn( Optional.of( speciality ) );
-        Speciality foundSpecialty = service.findById( 1L );
-        assertThat( foundSpecialty ).isNotNull();
-        verify( specialtyRepository ).findById( anyLong() );
+        then( specialtyRepository ).should().delete( any( Speciality.class ) );
     }
 
     @Test
@@ -59,34 +51,51 @@ class SpecialitySDJpaServiceTest {
 
     @Test
     void deleteById () {
+        // given - none
+        // when
         service.deleteById( 1L );
-        verify( specialtyRepository ).deleteById( anyLong() );
+        // then
+        then( specialtyRepository ).should( times( 1 ) ).deleteById( anyLong() );
     }
 
     @Test
     void deleteByIdAtLeast () {
+        // given - none
+        // when
         service.deleteById( 1L );
         service.deleteById( 1L );
-        verify( specialtyRepository, atLeastOnce() ).deleteById( anyLong() );
+        // then
+        then( specialtyRepository ).should( atLeast( 1 ) ).deleteById( anyLong() );
     }
 
     @Test
     void deleteByIdAtMost () {
+        // given - none
+        // when
         service.deleteById( 1L );
         service.deleteById( 1L );
-        verify( specialtyRepository, atMost( 5 ) ).deleteById( anyLong() );
+        // then
+        then( specialtyRepository ).should( atMost( 5 ) ).deleteById( anyLong() );
     }
 
     @Test
     void deleteByIdNever () {
+        // given - none
+        // when
         service.deleteById( 1L );
         service.deleteById( 1L );
-        verify( specialtyRepository, atMost( 5 ) ).deleteById( anyLong() );
-        verify( specialtyRepository, never() ).deleteById( 5L );
+        // then
+        then( specialtyRepository ).should( atLeast( 1 ) ).deleteById( anyLong() );
+        then( specialtyRepository ).should( atMost( 5 ) ).deleteById( anyLong() );
+        then( specialtyRepository ).should( never() ).deleteById( 5L );
     }
 
     @Test
     void testDelete () {
+        // given - none
+        // when
         service.delete( new Speciality() );
+        // then
+        then( specialtyRepository ).should().delete( any( Speciality.class ) );
     }
 }
