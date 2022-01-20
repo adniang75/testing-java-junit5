@@ -40,8 +40,8 @@ class IndexControllerTest implements ControllerTests {
     @Test
     @DisplayName( "Test exception handler" )
     void oupsHandler () {
-        assertTrue(
-                "notimplemented".equals( controller.oupsHandler() ),
+        assertEquals(
+                "notImplemented", controller.oupsHandler(),
                 () -> "This is some expensive "
                         + "Message to build "
                         + "for my test"
@@ -83,12 +83,14 @@ class IndexControllerTest implements ControllerTests {
 
     @Test
     void testAssumptionTrue () {
-        assumeTrue( "GURU".equalsIgnoreCase( System.getenv( "GURU_RUNTILE" ) ) );
+        assumeTrue( "GURU".equalsIgnoreCase( System.getenv( "GURU_RUNTIME" ) ) );
+        assertTrue( true );
     }
 
     @Test
     void testAssumptionTrueHome () {
         assumeTrue( "/Users/alassaneniang".equalsIgnoreCase( System.getenv( "HOME" ) ) );
+        assertTrue( true );
     }
 
     @Nested
@@ -97,37 +99,37 @@ class IndexControllerTest implements ControllerTests {
         @EnabledOnOs( OS.MAC )
         @Test
         void testOnMacOS () {
-
+            assertTrue( true );
         }
 
         @EnabledOnOs( OS.WINDOWS )
         @Test
         void testOnWindows () {
-
+            assertTrue( true );
         }
 
         @EnabledOnJre( JAVA_8 )
         @Test
         void testOnJava8 () {
-
+            assertTrue( true );
         }
 
         @EnabledOnJre( JAVA_11 )
         @Test
         void testOnJava11 () {
-
+            assertTrue( true );
         }
 
         @EnabledIfEnvironmentVariable( named = "USER", matches = "alassaneniang" )
         @Test
         void testIfUserIsMe () {
-
+            assertTrue( true );
         }
 
         @EnabledIfEnvironmentVariable( named = "USER", matches = "jt" )
         @Test
         void testIfUserIsJT () {
-
+            assertTrue( true );
         }
     }
 

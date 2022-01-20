@@ -14,8 +14,7 @@ import java.util.stream.Stream;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 //@Tag( "model" )
 class OwnerTest implements ModelTests {
@@ -58,6 +57,7 @@ class OwnerTest implements ModelTests {
     @ValueSource( strings = { "Spring", "Framework", "Guru" } )
     void testValueSource ( String value ) {
         System.out.println( "\t\tValue: " + value );
+        assertTrue( true );
     }
 
     @DisplayName( "Enum Source Test" )
@@ -65,6 +65,7 @@ class OwnerTest implements ModelTests {
     @EnumSource( OwnerType.class )
     void enumTest ( OwnerType ownerType ) {
         System.out.println( "\t\tValue: " + ownerType );
+        assertTrue( true );
     }
 
     @DisplayName( "CSV Input Test" )
@@ -76,6 +77,7 @@ class OwnerTest implements ModelTests {
     } )
     void csvInputTest ( String stateName, int value1, int value2 ) {
         System.out.println( "\t\tState: " + stateName + " Value1: " + value1 + " Value2: " + value2 );
+        assertTrue( true );
     }
 
     @DisplayName( "CSV From File Test" )
@@ -83,6 +85,7 @@ class OwnerTest implements ModelTests {
     @CsvFileSource( resources = "/input.csv", numLinesToSkip = 1 )
     void csvFromFileTest ( String stateName, int value1, int value2 ) {
         System.out.println( "\t\tState: " + stateName + " Value1: " + value1 + " Value2: " + value2 );
+        assertTrue( true );
     }
 
     @DisplayName( "Method Provider Test" )
@@ -90,6 +93,7 @@ class OwnerTest implements ModelTests {
     @MethodSource( "getArgs" )
     void fromMethodTest ( String stateName, int value1, int value2 ) {
         System.out.println( "\t\tState: " + stateName + " Value1: " + value1 + " Value2: " + value2 );
+        assertTrue( true );
     }
 
     @DisplayName( "Custom Provider Test" )
@@ -97,6 +101,7 @@ class OwnerTest implements ModelTests {
     @ArgumentsSource( CustomArgsProvider.class )
     void fromCustomProviderTest ( String stateName, int value1, int value2 ) {
         System.out.println( "\t\tState: " + stateName + " Value1: " + value1 + " Value2: " + value2 );
+        assertTrue( true );
     }
 
     @Nested

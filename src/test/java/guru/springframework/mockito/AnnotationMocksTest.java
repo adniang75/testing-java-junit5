@@ -7,6 +7,8 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class AnnotationMocksTest {
 
     @Mock
@@ -20,5 +22,6 @@ class AnnotationMocksTest {
     @Test
     void testMock () {
         mapMock.put( "key", "value" );
+        assertThat( mapMock ).containsEntry( "key", "value" );
     }
 }

@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
@@ -47,8 +48,12 @@ class VisitSDJpaServiceTest {
         Set<Visit> foundVisits = service.findAll();
         // then
         then( visitRepository ).should().findAll();
-        assertThat( foundVisits ).isNotNull();
-        assertThat( foundVisits ).hasSize( 5 );
+        assertAll(
+                () -> assertThat( foundVisits ).isNotNull(),
+                () -> assertThat( foundVisits ).hasSize( 5 )
+        );
+
+
     }
 
     @DisplayName( "Test Find By ID" )
